@@ -115,11 +115,6 @@ class _OtpScreenState extends ConsumerState<OtpScreen> with SingleTickerProvider
     }
   }
 
-  void _onOtpBackspace(int index, String value) {
-    if (value.isEmpty && index > 0) {
-      _focusNodes[index - 1].requestFocus();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -298,51 +293,59 @@ class _OtpScreenState extends ConsumerState<OtpScreen> with SingleTickerProvider
                                 return SizedBox(
                                   width: 45,
                                   height: 60,
-                                  child: TextField(
-                                    controller: _controllers[index],
-                                    focusNode: _focusNodes[index],
-                                    textAlign: TextAlign.center,
-                                    keyboardType: TextInputType.number,
-                                    maxLength: 1,
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: colorScheme.onSurface,
-                                    ),
-                                    decoration: InputDecoration(
-                                      counterText: '',
-                                      filled: true,
-                                      fillColor: isDark
-                                          ? Colors.white.withOpacity(0.05)
-                                          : Colors.white.withOpacity(0.5),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: BorderSide(
-                                          color: colorScheme.primary.withOpacity(0.3),
-                                        ),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: BorderSide(
-                                          color: colorScheme.primary.withOpacity(0.3),
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: BorderSide(
-                                          color: colorScheme.secondary,
-                                          width: 2,
-                                        ),
-                                      ),
-                                    ),
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
-                                    ],
-                                    onChanged: (value) => _onOtpChanged(index, value),
-                                    onTap: () {
-                                      // Clear the field when tapped
-                                      _controllers[index].clear();
+                                  child: KeyboardListener(
+                                    focusNode: FocusNode(skipTraversal: true),
+                                    onKeyEvent: (event) {
+                                      if (event is KeyDownEvent && 
+                                          event.logicalKey == LogicalKeyboardKey.backspace) {
+                                        if (_controllers[index].text.isEmpty && index > 0) {
+                                          _focusNodes[index - 1].requestFocus();
+                                          _controllers[index - 1].clear();
+                                        }
+                                      }
                                     },
+                                    child: TextField(
+                                      controller: _controllers[index],
+                                      focusNode: _focusNodes[index],
+                                      textAlign: TextAlign.center,
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 1,
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: colorScheme.onSurface,
+                                      ),
+                                      decoration: InputDecoration(
+                                        counterText: '',
+                                        filled: true,
+                                        fillColor: isDark
+                                            ? Colors.white.withOpacity(0.05)
+                                            : Colors.white.withOpacity(0.5),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                          borderSide: BorderSide(
+                                            color: colorScheme.primary.withOpacity(0.3),
+                                          ),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                          borderSide: BorderSide(
+                                            color: colorScheme.primary.withOpacity(0.3),
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                          borderSide: BorderSide(
+                                            color: colorScheme.secondary,
+                                            width: 2,
+                                          ),
+                                        ),
+                                      ),
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                      ],
+                                      onChanged: (value) => _onOtpChanged(index, value),
+                                    ),
                                   ),
                                 );
                               }),

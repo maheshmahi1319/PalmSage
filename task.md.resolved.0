@@ -1,0 +1,16 @@
+# Task Management linked to PalmSage App
+
+- [/] Initialize Project & Artifacts <!-- id: 0 -->
+- [ ] Research & Architecture Design <!-- id: 1 -->
+    - [ ] Create High-Level Architecture Diagram <!-- id: 1.1 -->
+    - [ ] Design Database Schema <!-- id: 1.2 -->
+- [ ] Implement Key Code Components <!-- id: 2 -->
+    - [ ] Camera & Hand Detection (ML Kit) <!-- id: 2.1 -->
+    - [ ] Palm Line Extraction (OpenCV/Edge Detection) <!-- id: 2.2 -->
+    - [ ] LLM Integration & Prompt Engineering <!-- id: 2.3 -->
+- [ ] UI/UX Design <!-- id: 3 -->
+    - [ ] Create UI Wireframes (Home, Scan, Results, History, Profile) <!-- id: 3.1 -->
+- [ ] Strategic Planning <!-- id: 4 -->
+    - [ ] Develop Monetization & Privacy Plan <!-- id: 4.1 -->
+    - [ ] Create Development Roadmap <!-- id: 4.2 -->
+- [ ] Final Review & Delivery <!-- id: 5 -->

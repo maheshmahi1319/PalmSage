@@ -235,6 +235,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
                                 color: colorScheme.onSurface,
                                 fontWeight: FontWeight.w500,
                               ),
+                              textInputAction: TextInputAction.done,
+                              onSubmitted: (_) => _onSendOtp(),
                               decoration: InputDecoration(
                                 labelText: 'Mobile Number',
                                 labelStyle: TextStyle(
